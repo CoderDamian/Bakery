@@ -10,3 +10,58 @@
 </ol>
 
 <h1>Place your Order: @Model.Product.Name</h1>
+<form method="post">
+    <div class="row">
+        <div class="col-sm-3">
+            <img src="~/images/products/thumbnails/@Model.Product.ImageName" />
+        </div>
+
+        <div class="col-sm-9">
+            <p>@Html.DisplayFor(model => model.Product.Description)</p>
+
+            <label asp-for="@Model.OrderEmail"></label>
+            <input class="form-control" asp-for="@Model.OrderEmail" />
+            <span asp-validation-for="@Model.OrderEmail"></span>
+
+            <label asp-for="@Model.OrderShipping"></label>
+            <textarea rows="4" class="form-control" asp-for="@Model.OrderShipping"></textarea>
+            <span asp-validation-for="@Model.OrderShipping"></span>
+
+            <div class="form-group row">
+                <label asp-for="OrderQuantity" class="col-1 col-form-label"></label>
+                <input asp-for="OrderQuantity" class="form-control form-control-sm" />
+                x
+                <p class="order-calc" id="orderPrice">@Model.Product.Price.ToString("f")</p>
+                =
+                <p class="order-calc" id="orderTotal">@Model.Product.Price.ToString("f")</p>
+                <span asp-validation-for="OrderQuantity"></span>
+            </div>
+
+            <p class="actions">
+                <input type="hidden" asp-for="Product.Id" />
+                <button class="btn btn-danger order-button" type="submit">Place Order</button>
+            </p>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+    <script type="text/javascript">
+        $(function () {
+            var price = parseFloat($("#orderPrice").text()).toFixed(2),
+                total = $("#orderTotal"),
+                orderQty = $("#OrderQuantity");
+            orderQty.on('change', function () {
+                var quantity = parseInt(orderQty.val());
+                if (!quantity || quantity < 1) {
+                    orderQty.val(1);
+                    quantity = 1;
+                } else if (quantity.toString() !== orderQty.val()) {
+                    orderQty.val(quantity);
+                }
+                total.text("$" + (price * quantity).toFixed(2));
+            });
+        });
+    </script>
+}
