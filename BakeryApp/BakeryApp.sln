@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{436FFCE9-9704-4930-B30F-395520D834A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{4216D2E3-9E64-4A1E-B5E0-201C839DB888}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebClient.csproj", "{4216D2E3-9E64-4A1E-B5E0-201C839DB888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
