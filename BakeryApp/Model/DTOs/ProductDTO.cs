@@ -1,6 +1,6 @@
-﻿namespace WebClient.Models
+﻿namespace Model.DTOs
 {
-    public class Product
+    public class ProductDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

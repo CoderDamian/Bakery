@@ -3,7 +3,6 @@ using WebClient.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<MyDbContext>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using WebClient.Models;
+using Model;
 
-namespace WebClient.Data.Configurations
+namespace Persistence.Mappings
 {
-    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    public class ProductMap : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
