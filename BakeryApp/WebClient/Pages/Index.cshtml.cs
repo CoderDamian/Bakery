@@ -12,6 +12,9 @@ namespace WebClient.Pages
         private readonly MyDbContext _dbContext;
 
         [BindProperty]
+        public string MyCookie { get; set; } = string.Empty;
+
+        [BindProperty]
         public IEnumerable<Product> Products { get; set; } = new List<Product>();
 
         [BindProperty]
@@ -28,6 +31,9 @@ namespace WebClient.Pages
             Products = await _dbContext.Products.ToListAsync().ConfigureAwait(false);
 
             FeaturedProduct = Products.ElementAt(new Random().Next(Products.Count()));
+
+            if (Request.Cookies.TryGetValue("MyCookie", out var message))
+                MyCookie = message;
         }
     }
 }
