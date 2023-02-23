@@ -1,23 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebClient.Data.Configurations;
-using WebClient.Models;
+using Model;
+using Persistence.Mappings;
 
-namespace WebClient.Data
+namespace Persistence
 {
-    public class MyDbContext : DbContext
+    public class BakeryDbContext : DbContext
     {
-        public MyDbContext(DbContextOptions<MyDbContext> options)
+        public BakeryDbContext(DbContextOptions<BakeryDbContext> options)
             : base(options)
         {
 
         }
 
+        public DbSet<Product> Products { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseSqlite(@"Data source = bakery.db");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.ApplyConfiguration(new ProductConfiguration()).Seed();
-
-        public DbSet<Product> Products { get; set; }
+            => modelBuilder.ApplyConfiguration(new ProductMap());
     }
 }
