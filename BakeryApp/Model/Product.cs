@@ -1,6 +1,6 @@
-﻿using Model.Seedwork;
+﻿using DomainModel.Seedwork;
 
-namespace Model
+namespace DomainModel
 {
     public class Product : BaseEntity
     {

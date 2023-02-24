@@ -1,13 +1,13 @@
-﻿namespace Model.DTOs
+﻿namespace DataTransferObjects.DTOs
 {
     public class ListProductsDTO
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string ImageName { get; set; } = string.Empty;
-        public IEnumerable<Product> Products { get; set; } = null!;
+        public IEnumerable<ProductDTO> Products { get; set; } = null!;
     }
 }

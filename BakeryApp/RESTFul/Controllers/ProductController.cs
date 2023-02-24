@@ -1,6 +1,6 @@
 ﻿using AppliationService.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Model.DTOs;
+using DataTransferObjects.DTOs;
 
 namespace RESTFul.Controllers
 {
@@ -20,9 +20,9 @@ namespace RESTFul.Controllers
         {
             try
             {
-                var products = await _productService.GetAllAsync().ConfigureAwait(false);
+                ListProductsDTO productsDTO = await _productService.GetAllAsync().ConfigureAwait(false);
 
-                return Ok(products);
+                return Ok(productsDTO);
             }
             catch (Exception)
             {

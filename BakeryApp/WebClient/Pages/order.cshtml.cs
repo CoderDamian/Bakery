@@ -1,18 +1,18 @@
+using DataTransferObjects.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
-using WebClient.Data;
-using WebClient.Models;
+using System.Text.Json;
 
 namespace WebClient.Pages
 {
     public class orderModel : PageModel
     {
-        private readonly MyDbContext _dbContext;
+        private readonly HttpClient _httpClient;
+        private JsonSerializerOptions _options;
 
         [BindProperty]
-        public Product? Product { get; set; }
+        public ProductDTO? Product { get; set; }
 
         [BindProperty, EmailAddress, Required, Display(Name = "Your email address")]
         public string OrderEmail { get; set; }
@@ -23,17 +23,28 @@ namespace WebClient.Pages
         [BindProperty, Display(Name = "Quantity")]
         public int OrderQuantity { get; set; }
 
-        public orderModel(MyDbContext dbContext)
+        public orderModel(HttpClient httpClient)
         {
-            this._dbContext = dbContext;
+            _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri("https://localhost:7152/api/");
+            _httpClient.Timeout = new TimeSpan(0, 0, 30);
+
+            _options = new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            };
         }
 
         public async Task OnGet(int id)
         {
-            Product = await _dbContext.Products.FindAsync(id).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync($"product/{id}").ConfigureAwait(false);
 
-            if (Product == null)
-                Product = new Product();
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+                Product = await JsonSerializer.DeserializeAsync<ProductDTO>(content, _options);
+            }
         }
 
         public IActionResult OnPost()

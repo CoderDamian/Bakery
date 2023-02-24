@@ -1,8 +1,8 @@
 ﻿using AppliationService.Contracts;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Model;
-using Model.DTOs;
+using DomainModel;
+using DataTransferObjects.DTOs;
 using Persistence;
 
 namespace AppliationService
@@ -28,14 +28,14 @@ namespace AppliationService
 
                 ListProductsDTO productsDTO = new ListProductsDTO()
                 {
-                    ID = FeaturedProduct.ID,
+                    Id = FeaturedProduct.ID,
                     Name = FeaturedProduct.Name,
                     Description = FeaturedProduct.Description,
                     Price = FeaturedProduct.Price,
                     ImageName = FeaturedProduct.ImageName
                 };
 
-                productsDTO.Products = _mapper.Map<IEnumerable<Product>>(products);
+                productsDTO.Products = _mapper.Map<IEnumerable<ProductDTO>>(products);
 
                 return productsDTO;
             }

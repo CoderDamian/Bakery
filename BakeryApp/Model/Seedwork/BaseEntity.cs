@@ -1,4 +1,4 @@
-﻿namespace Model.Seedwork
+﻿namespace DomainModel.Seedwork
 {
     public abstract class BaseEntity
     {
