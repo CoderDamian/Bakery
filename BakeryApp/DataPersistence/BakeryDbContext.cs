@@ -17,7 +17,7 @@ namespace Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            if (OracleConfiguration.TnsAdmin is null)
             {
                 OracleConfiguration.TnsAdmin = @"C:\Users\Fmla\Documents\OracleWallet\MyERP\";
                 OracleConfiguration.WalletLocation = OracleConfiguration.TnsAdmin;

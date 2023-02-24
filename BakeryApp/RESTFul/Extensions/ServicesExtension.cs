@@ -14,7 +14,11 @@ namespace RESTFul.Extensions
         public static void AddAutoMapper(this IServiceCollection services)
             => services.AddAutoMapper(typeof(ProductProfile));
 
-        public static void AddSqlite(this IServiceCollection services)
-            => services.AddDbContext<BakeryDbContext>(opt => opt.UseSqlite(@"Data source = bakery.db"));
+        public static void AddDataBase(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration["ConnectionStrings:OracleDB"];
+
+            services.AddDbContext<BakeryDbContext>(opt => opt.UseOracle(connectionString));
+        }
     }
 }
