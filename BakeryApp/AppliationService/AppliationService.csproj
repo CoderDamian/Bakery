@@ -13,7 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataTransferObjects\DataTransferObjects.csproj" />
     <ProjectReference Include="..\Model\DomainModel.csproj" />
-    <ProjectReference Include="..\Persistence\Persistence.csproj" />
+    <ProjectReference Include="..\Persistence\DataPersistence.csproj" />
   </ItemGroup>
 
 </Project>
