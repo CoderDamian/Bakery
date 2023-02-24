@@ -4,7 +4,7 @@
 
 ## SPA Application (Razor Pages)
 
-![](img/eshop-spa-app-home.png)
+![](img/bakeryIndex.png)
 
 ## Getting Started
 
