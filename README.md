@@ -4,7 +4,7 @@
 
 ## SPA Application (Razor Pages)
 
-![](images/bakeryIndex.png)
+![](images/BakeryIndex.png)
 
 ## Getting Started
 
