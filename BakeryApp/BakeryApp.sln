@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RESTFul", "RESTFul\RESTFul.csproj", "{75613ADD-E39E-4932-AAD3-18E4E41826BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{4009CAFE-B736-4C61-88A0-949CA056277B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataPersistence", "Persistence\DataPersistence.csproj", "{4009CAFE-B736-4C61-88A0-949CA056277B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel", "Model\DomainModel.csproj", "{6C181383-EBA1-43F1-AAA0-1F80BE4FED10}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppliationService", "AppliationService\AppliationService.csproj", "{47502572-9BB5-46E5-AC10-E0C2E2629B78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransferObjects", "DataTransferObjects\DataTransferObjects.csproj", "{74FB2982-618C-4552-BD6B-8828F5BB9FC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTransferObjects", "DataTransferObjects\DataTransferObjects.csproj", "{74FB2982-618C-4552-BD6B-8828F5BB9FC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
