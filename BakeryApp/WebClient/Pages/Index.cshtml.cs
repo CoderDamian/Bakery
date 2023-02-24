@@ -1,39 +1,43 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataTransferObjects.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using WebClient.Data;
-using WebClient.Models;
+using System.Text.Json;
 
 namespace WebClient.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly MyDbContext _dbContext;
+        private readonly HttpClient _httpClient;
+        private JsonSerializerOptions _options;
 
         [BindProperty]
-        public string MyCookie { get; set; } = string.Empty;
+        public ListProductsDTO? Product { get; set; }
 
-        [BindProperty]
-        public IEnumerable<Product> Products { get; set; } = new List<Product>();
-
-        [BindProperty]
-        public Product FeaturedProduct { get; set; }
-
-        public IndexModel(ILogger<IndexModel> logger, MyDbContext dbContext)
+        public IndexModel(ILogger<IndexModel> logger, HttpClient httpClient)
         {
             _logger = logger;
-            this._dbContext = dbContext;
+
+            _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri("https://localhost:7152/api/");
+            _httpClient.Timeout = new TimeSpan(0, 0, 30);
+
+            _options = new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            };
         }
 
         public async Task OnGet()
         {
-            Products = await _dbContext.Products.ToListAsync().ConfigureAwait(false);
+            var response = await _httpClient.GetAsync("product").ConfigureAwait(false);
 
-            FeaturedProduct = Products.ElementAt(new Random().Next(Products.Count()));
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
-            if (Request.Cookies.TryGetValue("MyCookie", out var message))
-                MyCookie = message;
+                Product = await JsonSerializer.DeserializeAsync<ListProductsDTO>(content, _options).ConfigureAwait(false);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Model.DTOs;
+﻿using DataTransferObjects.DTOs;
 
 namespace AppliationService.Contracts
 {

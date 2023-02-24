@@ -4,27 +4,25 @@
     ViewData["Title"] = "Home page";
 }
 
-<h1>Cookie: @Model.MyCookie</h1>
-
 <h1>Welcome to Fourth Coffee!</h1>
 <div id="FeaturedProduct" class="row">
     <div class="col-sm-8">
-        <img src="~/images/products/@Model.FeaturedProduct.ImageName" class="img-fluid rounded" />
+        <img src="~/images/products/@Model.Product.ImageName" class="img-fluid rounded" />
     </div>
 
     <div class="col-sm-4">
-        <h2>@Html.DisplayFor(model => model.FeaturedProduct.Name)</h2>
-        <p>@String.Format("{0:f}", Model.FeaturedProduct.Price)</p>
-        <p>@Model.FeaturedProduct.Description</p>
+        <h2>@Html.DisplayFor(model => model.Product.Name)</h2>
+        <p>@String.Format("{0:f}", Model.Product.Price)</p>
+        <p>@Model.Product.Description</p>
 
         <div>
-            <a class="btn btn-sm btn-danger order-button float-right" asp-page="/order" asp-route-id="@Model.FeaturedProduct.Id" title="Order @Model.FeaturedProduct.Name">Order Now</a>
+            <a class="btn btn-sm btn-danger order-button float-right" asp-page="/order" asp-route-id="@Model.Product.Id" title="Order @Model.Product.Name">Order Now</a>
         </div>
     </div>
 </div>
 
 <div id="ProductsWrapper" class="row">
-    @foreach (var product in Model.Products.OrderBy(p => p.Name))
+    @foreach (var product in Model.Product.Products.OrderBy(p => p.Name))
     {
         <div class="col-sm-3">
             <a asp-page="/order" asp-route-id="@product.Id" title="Order @product.Name">
