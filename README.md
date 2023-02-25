@@ -5,7 +5,7 @@
 ![](images/BakeryIndex.PNG)
 
 ## Important notes !!!
-The project uses Oracle Autonomous Database (ADB) configured with [Oracle Free Cloud](https://www.oracle.com/es/cloud/free/). You must have to configure your connection string configured with [user secret](https://github.com/CoderDamian/Bakery/blob/250a8caf165c750d083c6ffbf7b836d2108d9651/BakeryApp/RESTFul/RESTFul.csproj#L7) according with [connection strings](https://github.com/CoderDamian/Bakery/blob/250a8caf165c750d083c6ffbf7b836d2108d9651/BakeryApp/RESTFul/appsettings.json#L9) and the corresponding [wallet connection](https://github.com/CoderDamian/Bakery/blob/250a8caf165c750d083c6ffbf7b836d2108d9651/BakeryApp/DataPersistence/BakeryDbContext.cs#L22).
+The project uses Oracle Autonomous Database (ADB) configured with [Oracle Free Cloud](https://www.oracle.com/es/cloud/free/). You must have to configure your connection string configured with [user secret](https://github.com/CoderDamian/Bakery/blob/250a8caf165c750d083c6ffbf7b836d2108d9651/BakeryApp/RESTFul/RESTFul.csproj#L7) according to [connection strings](https://github.com/CoderDamian/Bakery/blob/250a8caf165c750d083c6ffbf7b836d2108d9651/BakeryApp/RESTFul/appsettings.json#L9) and the corresponding [wallet connection](https://github.com/CoderDamian/Bakery/blob/250a8caf165c750d083c6ffbf7b836d2108d9651/BakeryApp/DataPersistence/BakeryDbContext.cs#L22). The database script is in the DataPersistence folder.
 
 
 ## Read further
