@@ -1,26 +1,25 @@
 ﻿using AppliationService.Contracts;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using DomainModel;
+using DataPersistence.Contracts;
 using DataTransferObjects.DTOs;
-using Persistence;
+using DomainModel;
 
-namespace AppliationService
+namespace AppliationService.Services
 {
     public class ProductService : IProductService
     {
-        private readonly BakeryDbContext _bakeryDbContext;
+        private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IMapper _mapper;
 
-        public ProductService(BakeryDbContext bakeryDbContext, IMapper mapper)
+        public ProductService(IRepositoryWrapper repositoryWrapper, IMapper mapper)
         {
-            this._bakeryDbContext = bakeryDbContext;
-            this._mapper = mapper;
+            _repositoryWrapper = repositoryWrapper;
+            _mapper = mapper;
         }
 
         public async Task<ListProductsDTO> GetAllAsync()
         {
-            IEnumerable<Product> products = await _bakeryDbContext.Products.ToListAsync().ConfigureAwait(false);
+            IEnumerable<Product> products = await _repositoryWrapper.ProductRepository.GetAllProducts().ConfigureAwait(false);
 
             if (products.Any())
             {
@@ -47,7 +46,7 @@ namespace AppliationService
 
         public async Task<ProductDTO> GetByIDAsync(int id)
         {
-            Product? product = await _bakeryDbContext.Products.FindAsync(id).ConfigureAwait(false);
+            Product? product = await _repositoryWrapper.ProductRepository.GetProductByID(id).ConfigureAwait(false);
 
             if (product == null)
                 throw new NullReferenceException(nameof(product));

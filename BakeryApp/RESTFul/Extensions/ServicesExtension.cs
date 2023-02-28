@@ -1,8 +1,13 @@
-﻿using AppliationService;
-using AppliationService.Contracts;
+﻿using AppliationService.Contracts;
 using AppliationService.Mappings;
+using AppliationService.Services;
+using DataPersistence;
+using DataPersistence.Contracts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Persistence;
+using System.Text;
 
 namespace RESTFul.Extensions
 {
@@ -11,7 +16,28 @@ namespace RESTFul.Extensions
         public static void AddBakeryService(this IServiceCollection services)
             => services.AddScoped<IProductService, ProductService>();
 
-        public static void AddAutoMapper(this IServiceCollection services)
+        public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(opt => {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = configuration["JWT:Issuer"],
+                        ValidAudience = configuration["JWT:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"]!))
+                    };
+            });
+        }
+
+        public static void AddMapper(this IServiceCollection services)
             => services.AddAutoMapper(typeof(ProductProfile));
 
         public static void AddDataBase(this IServiceCollection services, IConfiguration configuration)
@@ -20,5 +46,8 @@ namespace RESTFul.Extensions
 
             services.AddDbContext<BakeryDbContext>(opt => opt.UseOracle(connectionString));
         }
+
+        public static void AddRepositories(this IServiceCollection services)
+            => services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
     }
 }
