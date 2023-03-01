@@ -13,9 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppliationService", "Applia
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTransferObjects", "DataTransferObjects\DataTransferObjects.csproj", "{74FB2982-618C-4552-BD6B-8828F5BB9FC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPersistence", "DataPersistence\DataPersistence.csproj", "{E6FCD8F9-F169-48E2-A0AA-6961BE8EFB96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataPersistence", "DataPersistence\DataPersistence.csproj", "{E6FCD8F9-F169-48E2-A0AA-6961BE8EFB96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel", "DomainModel\DomainModel.csproj", "{5B231841-C49F-4E5E-AF1B-D2A15894C556}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel", "DomainModel\DomainModel.csproj", "{5B231841-C49F-4E5E-AF1B-D2A15894C556}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B8CE03B2-B149-4C7D-86C6-B2414A2BDA25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTful.Test", "Tests\RESTful.Test\RESTful.Test.csproj", "{6462D6FD-B0C4-42CF-8206-8A330D0BD098}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{5B231841-C49F-4E5E-AF1B-D2A15894C556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B231841-C49F-4E5E-AF1B-D2A15894C556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B231841-C49F-4E5E-AF1B-D2A15894C556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6462D6FD-B0C4-42CF-8206-8A330D0BD098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6462D6FD-B0C4-42CF-8206-8A330D0BD098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6462D6FD-B0C4-42CF-8206-8A330D0BD098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6462D6FD-B0C4-42CF-8206-8A330D0BD098}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 		{74FB2982-618C-4552-BD6B-8828F5BB9FC2} = {436FFCE9-9704-4930-B30F-395520D834A2}
 		{E6FCD8F9-F169-48E2-A0AA-6961BE8EFB96} = {436FFCE9-9704-4930-B30F-395520D834A2}
 		{5B231841-C49F-4E5E-AF1B-D2A15894C556} = {436FFCE9-9704-4930-B30F-395520D834A2}
+		{6462D6FD-B0C4-42CF-8206-8A330D0BD098} = {B8CE03B2-B149-4C7D-86C6-B2414A2BDA25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D046DE8F-9790-46C1-BC14-8FEA40F774E6}
