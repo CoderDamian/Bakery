@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DomainModel;
-using DataTransferObjects.DTOs;
+using DataTransferObjects.DTOs.Product;
 
 namespace AppliationService.Mappings
 {

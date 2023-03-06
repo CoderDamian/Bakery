@@ -2,11 +2,6 @@
 using DataPersistence.Repositories;
 using DomainModel.Contracts;
 using Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataPersistence
 {
@@ -20,6 +15,7 @@ namespace DataPersistence
         }
 
         private IProductRepository productRepository = null!;
+
         public IProductRepository ProductRepository
         {
             get
@@ -28,6 +24,19 @@ namespace DataPersistence
                     productRepository = new ProductRepository(_bakeryDbContext);
 
                 return productRepository;
+            }
+        }
+
+        private IUserRepository userRepository;
+
+        public IUserRepository UserRepository
+        {
+            get 
+            { 
+                if (userRepository == null)
+                    userRepository = new UserRepository(_bakeryDbContext);
+
+                return userRepository;
             }
         }
     }

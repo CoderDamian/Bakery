@@ -1,4 +1,4 @@
-﻿namespace DataTransferObjects.DTOs
+﻿namespace DataTransferObjects.DTOs.Product
 {
     public class ListProductsDTO
     {

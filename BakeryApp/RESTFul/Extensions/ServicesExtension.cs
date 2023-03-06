@@ -3,6 +3,8 @@ using AppliationService.Mappings;
 using AppliationService.Services;
 using DataPersistence;
 using DataPersistence.Contracts;
+using DataPersistence.Repositories;
+using DomainModel.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -14,7 +16,10 @@ namespace RESTFul.Extensions
     public static class ServicesExtension
     {
         public static void AddBakeryService(this IServiceCollection services)
-            => services.AddScoped<IProductService, ProductService>();
+        {
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IUserService, UserService>();
+        }
 
         public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
@@ -48,6 +53,9 @@ namespace RESTFul.Extensions
         }
 
         public static void AddRepositories(this IServiceCollection services)
-            => services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<IUserRepository, UserRepository>();
+        }
     }
 }

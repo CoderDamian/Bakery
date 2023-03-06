@@ -1,7 +1,7 @@
 ﻿using AppliationService.Contracts;
 using AutoMapper;
 using DataPersistence.Contracts;
-using DataTransferObjects.DTOs;
+using DataTransferObjects.DTOs.Product;
 using DomainModel;
 
 namespace AppliationService.Services

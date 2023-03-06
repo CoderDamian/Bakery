@@ -1,6 +1,6 @@
 ﻿using AppliationService.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using DataTransferObjects.DTOs;
+using DataTransferObjects.DTOs.Product;
 
 namespace RESTFul.Controllers
 {
@@ -26,6 +26,8 @@ namespace RESTFul.Controllers
             }
             catch (Exception)
             {
+                return BadRequest();
+
                 throw;
             }
         }

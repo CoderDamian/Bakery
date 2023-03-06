@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataPersistence.Mappings;
 using DomainModel;
-using Persistence.Mappings;
+using Microsoft.EntityFrameworkCore;
 using Oracle.ManagedDataAccess.Client;
+using Persistence.Mappings;
 
 namespace Persistence
 {
@@ -14,6 +15,7 @@ namespace Persistence
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,6 +27,9 @@ namespace Persistence
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.ApplyConfiguration(new ProductMap());
+        {
+            modelBuilder.ApplyConfiguration(new ProductMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
+        }
     }
 }
