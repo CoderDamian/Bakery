@@ -1,4 +1,4 @@
-﻿using DataTransferObjects.DTOs;
+﻿using DataTransferObjects.DTOs.Product;
 
 namespace AppliationService.Contracts
 {
