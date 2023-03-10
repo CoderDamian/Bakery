@@ -12,35 +12,38 @@ namespace AppliationService.Services
         private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
         private readonly ITokenService _tokenService;
-        private readonly IConfiguration _configuration;
 
-        public UserService(IMapper mapper, IRepositoryWrapper repository, ITokenService tokenService, IConfiguration configuration)
+        public UserService(IMapper mapper, IRepositoryWrapper repository, ITokenService tokenService)
         {
             this._mapper = mapper;
             this._repository = repository ?? throw new ArgumentNullException(nameof(repository));
             this._tokenService = tokenService;
-            this._configuration = configuration;
         }
 
         public async Task<Token?> ValidateCredentials(LoginUserDTO userDTO)
         {
             User user = _mapper.Map<User>(userDTO);
 
-            bool userExists = await _repository.UserRepository.ValidateCredentials(user).ConfigureAwait(false);
+            int userID = await _repository.UserRepository
+                .ValidateCredentials(user.Name, user.Password)
+                .ConfigureAwait(false);
 
-            if (userExists)
+            if (userID == -1)
             {
-                string? issuer = _configuration["JWT:Issuer"];
-                string? audience = _configuration["JWT:Audience"];
-                string? key = _configuration["JWT:SecretKey"];
-
-                Token token =  _tokenService.GenerateToken(issuer, audience, key);
-
-                return token;
+                return null;
             }
             else
             {
-                return null;
+                Token token = _tokenService.GetNewToken();
+
+                await _repository.UserRepository
+                    .SaveTokenByUserID(userID, token.Refresh, token.ExpiryTime)
+                    .ConfigureAwait(false);
+
+                await _repository.Save()
+                    .ConfigureAwait(false);
+
+                return token;
             }
         }
     }

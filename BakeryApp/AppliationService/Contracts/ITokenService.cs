@@ -1,9 +1,14 @@
 ﻿using DomainModel;
+using System.Security.Claims;
 
 namespace AppliationService.Contracts
 {
     public interface ITokenService
     {
-        Token GenerateToken(string issuer, string audience, string key);
+        Token GetNewToken();
+        string GetValue();
+        string GetRefresh(); 
+        ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
+        DateTime GetExpiryTime();
     }
 }

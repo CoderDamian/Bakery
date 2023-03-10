@@ -39,5 +39,10 @@ namespace DataPersistence
                 return userRepository;
             }
         }
+
+        public async Task Save()
+        {
+            await _bakeryDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
     }
 }
