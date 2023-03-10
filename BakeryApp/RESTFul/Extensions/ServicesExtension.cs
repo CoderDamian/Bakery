@@ -19,6 +19,7 @@ namespace RESTFul.Extensions
         {
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenService, TokenService>();
         }
 
         public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
