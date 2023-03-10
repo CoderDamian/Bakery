@@ -5,6 +5,6 @@ namespace AppliationService.Contracts
 {
     public interface IUserService
     {
-        Task<bool> ValidateUserExistence(LoginUserDTO userDTO);
+        Task<Token?> ValidateCredentials(LoginUserDTO userDTO);
     }
 }

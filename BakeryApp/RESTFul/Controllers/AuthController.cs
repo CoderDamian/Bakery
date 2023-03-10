@@ -1,5 +1,6 @@
 ﻿using AppliationService.Contracts;
 using DataTransferObjects.DTOs.User;
+using DomainModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RESTFul.Controllers
@@ -18,15 +19,18 @@ namespace RESTFul.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO userDTO)
         {
-            var userExists = await _userService.ValidateUserExistence(userDTO).ConfigureAwait(false);
+            if (userDTO == null)
+                return BadRequest();
 
-            if (userExists)
+            Token? token = await _userService.ValidateCredentials(userDTO).ConfigureAwait(false);
+
+            if (token == null)
             {
-                return Ok();
+                return Unauthorized();
             }
             else
             {
-                return Unauthorized();
+                return Ok(token);
             }
         }
     }

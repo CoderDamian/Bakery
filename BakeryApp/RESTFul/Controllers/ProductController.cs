@@ -1,6 +1,7 @@
 ﻿using AppliationService.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using DataTransferObjects.DTOs.Product;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RESTFul.Controllers
 {
@@ -15,7 +16,7 @@ namespace RESTFul.Controllers
             this._productService = productService;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<IActionResult> GetAll()
         {
             try

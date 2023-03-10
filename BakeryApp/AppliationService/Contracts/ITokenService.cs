@@ -4,6 +4,6 @@ namespace AppliationService.Contracts
 {
     public interface ITokenService
     {
-        Token Authenticate(User user);
+        Token GenerateToken(string issuer, string audience, string key);
     }
 }
