@@ -16,6 +16,12 @@ CREATE TABLE users (
     password VARCHAR2(10)
 );
 
+alter table users 
+add RefreshToken nvarchar2(100) null;
+
+alter table users
+add RefreshTokenExpiryTime  date null;
+
 prompt - creating constraints
 ALTER TABLE users ADD CONSTRAINT user_pk PRIMARY KEY ( id );
 
@@ -76,3 +82,21 @@ REM Inserting data in USER table
 REM *****************************
 insert into users (username, password) values ('user1', '111');
 insert into users (username, password) values ('user2', '222');
+
+
+REM *******************
+REM Creating procedures
+REM *******************
+-- Procedure to update token values by userID
+CREATE OR REPLACE procedure UpdateUserToken(userId in number, refreshToken in nvarchar2, expiryTime Date) 
+AS
+BEGIN
+
+    UPDATE users
+    SET
+        refreshtoken = updateusertoken.refreshtoken,
+        refreshtokenexpirytime = updateusertoken.expirytime
+    WHERE
+        id = updateusertoken.userid;
+
+END updateusertoken;

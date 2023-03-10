@@ -2,6 +2,7 @@
 {
     public interface IUserRepository
     {
-        Task<bool> ValidateCredentials(User user);
+        Task<int> ValidateCredentials(string userName, string password);
+        Task SaveTokenByUserID(int userID, string refreshToken, DateTime expiryTime);
     }
 }

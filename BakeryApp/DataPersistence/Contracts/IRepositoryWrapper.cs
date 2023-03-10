@@ -6,5 +6,6 @@ namespace DataPersistence.Contracts
     {
         public IProductRepository ProductRepository { get; }  
         public IUserRepository UserRepository { get; }
+        Task Save();
     }
 }
