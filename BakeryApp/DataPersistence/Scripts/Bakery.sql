@@ -100,3 +100,21 @@ BEGIN
         id = updateusertoken.userid;
 
 END updateusertoken;
+
+
+-- Procedure to update refresh token by userID
+CREATE OR REPLACE PROCEDURE updaterefreshtoken (
+    userid       IN NUMBER,
+    refreshtoken IN NVARCHAR2
+) AS
+BEGIN
+    UPDATE users
+    SET
+        refreshtoken = updaterefreshtoken.refreshtoken
+    WHERE
+        id = updaterefreshtoken.userid;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE;
+END updaterefreshtoken;

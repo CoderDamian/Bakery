@@ -4,6 +4,7 @@ using DataPersistence.Contracts;
 using DataTransferObjects.DTOs.User;
 using DomainModel;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
 
 namespace AppliationService.Services
 {
@@ -34,7 +35,9 @@ namespace AppliationService.Services
             }
             else
             {
-                Token token = _tokenService.GetNewToken();
+                IEnumerable<Claim> claims = GetClaims(user.Name);
+
+                Token token = _tokenService.GetNewToken(claims);
 
                 await _repository.UserRepository
                     .SaveTokenByUserID(userID, token.Refresh, token.ExpiryTime)
@@ -45,6 +48,17 @@ namespace AppliationService.Services
 
                 return token;
             }
+        }
+
+        private IEnumerable<Claim> GetClaims(string userName)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.Role, "Manager")
+            };
+
+            return claims;
         }
     }
 }

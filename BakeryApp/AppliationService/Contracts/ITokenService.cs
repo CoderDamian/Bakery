@@ -5,10 +5,7 @@ namespace AppliationService.Contracts
 {
     public interface ITokenService
     {
-        Token GetNewToken();
-        string GetValue();
-        string GetRefresh(); 
-        ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
-        DateTime GetExpiryTime();
+        Token GetNewToken(IEnumerable<Claim> claims);
+        Task<Token> GetNewRefreshToken(string accessTokenValue, string refreshTokenValue);
     }
 }
