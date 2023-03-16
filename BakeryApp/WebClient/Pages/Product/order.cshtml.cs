@@ -2,6 +2,7 @@ using DataTransferObjects.DTOs.Product;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace WebClient.Pages
@@ -37,6 +38,10 @@ namespace WebClient.Pages
 
         public async Task OnGet(int id)
         {
+            Request.Cookies.TryGetValue("AccessTokenValue", out string? accessValueToken);
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessValueToken);
+
             var response = await _httpClient.GetAsync($"product/{id}").ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode)

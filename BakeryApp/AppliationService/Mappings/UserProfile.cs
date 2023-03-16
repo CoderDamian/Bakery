@@ -11,9 +11,6 @@ namespace AppliationService.Mappings
         {
             CreateMap<User, LoginUserDTO>()
                 .ReverseMap();
-
-            CreateMap<Token, TokenDTO>()
-                .ReverseMap();
         }
     }
 }

@@ -11,6 +11,9 @@ namespace AppliationService.Mappings
             CreateMap<Product, ListProductsDTO>();
 
             CreateMap<Product, ProductDTO>();
+
+            // .ForMember(dest => dest.EventDate, opt => opt.MapFrom(src => src.Date.Date))
+
         }
     }
 }
