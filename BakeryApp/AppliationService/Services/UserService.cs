@@ -1,10 +1,12 @@
 ﻿using AppliationService.Contracts;
 using AutoMapper;
 using DataPersistence.Contracts;
+using DataTransferObjects.DTOs.Token;
 using DataTransferObjects.DTOs.User;
 using DomainModel;
 using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace AppliationService.Services
 {
@@ -21,7 +23,7 @@ namespace AppliationService.Services
             this._tokenService = tokenService;
         }
 
-        public async Task<Token?> ValidateCredentials(LoginUserDTO userDTO)
+        public async Task<TokenDTO?> ValidateCredentials(LoginUserDTO userDTO)
         {
             User user = _mapper.Map<User>(userDTO);
 
@@ -35,9 +37,7 @@ namespace AppliationService.Services
             }
             else
             {
-                IEnumerable<Claim> claims = GetClaims(user.Name);
-
-                Token token = _tokenService.GetNewToken(claims);
+                Token token = _tokenService.GetNewToken(user.Name);
 
                 await _repository.UserRepository
                     .SaveTokenByUserID(userID, token.Refresh, token.ExpiryTime)
@@ -46,7 +46,9 @@ namespace AppliationService.Services
                 await _repository.Save()
                     .ConfigureAwait(false);
 
-                return token;
+                TokenDTO tokenDTO = _mapper.Map<TokenDTO>(token);
+
+                return tokenDTO;
             }
         }
 

@@ -1,10 +1,11 @@
-﻿using DataTransferObjects.DTOs.User;
+﻿using DataTransferObjects.DTOs.Token;
+using DataTransferObjects.DTOs.User;
 using DomainModel;
 
 namespace AppliationService.Contracts
 {
     public interface IUserService
     {
-        Task<Token?> ValidateCredentials(LoginUserDTO userDTO);
+        Task<TokenDTO?> ValidateCredentials(LoginUserDTO userDTO);
     }
 }

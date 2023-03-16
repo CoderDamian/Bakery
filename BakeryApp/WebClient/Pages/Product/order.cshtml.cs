@@ -50,7 +50,7 @@ namespace WebClient.Pages
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
-                return RedirectToPage("OrderSuccess");
+                return RedirectToPage("/product/OrderSuccess");
 
             return Page();
         }

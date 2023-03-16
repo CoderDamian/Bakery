@@ -33,7 +33,7 @@ namespace RESTFul.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<IActionResult> GetByID(int id)
         {
             try
