@@ -2,7 +2,7 @@
 {
     public class TokenDTO
     {
-        public string AccessValue { get; set; } = string.Empty;
-        public string RefreshValue { get; set; } = string.Empty;
+        public string AccessTokenValue { get; set; } = string.Empty;
+        public string RefreshTokenValue { get; set; } = string.Empty;
     }
 }

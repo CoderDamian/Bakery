@@ -1,6 +1,9 @@
 ﻿using DataTransferObjects.DTOs.Product;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace WebClient.Pages
@@ -28,9 +31,16 @@ namespace WebClient.Pages
             };
         }
 
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            Request.Cookies.TryGetValue("AccessTokenValue", out string? accessValueToken);
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessValueToken);
+
             var response = await _httpClient.GetAsync("product").ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                return RedirectToPage("./User/Login");
 
             if (response.IsSuccessStatusCode)
             {
@@ -38,6 +48,8 @@ namespace WebClient.Pages
 
                 Product = await JsonSerializer.DeserializeAsync<ListProductsDTO>(content, _options).ConfigureAwait(false);
             }
+
+            return Page();
         }
     }
 }

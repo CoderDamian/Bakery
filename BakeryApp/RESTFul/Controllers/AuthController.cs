@@ -1,4 +1,5 @@
 ﻿using AppliationService.Contracts;
+using DataTransferObjects.DTOs.Token;
 using DataTransferObjects.DTOs.User;
 using DomainModel;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace RESTFul.Controllers
             if (userDTO == null)
                 return BadRequest();
 
-            Token? token = await _userService.ValidateCredentials(userDTO).ConfigureAwait(false);
+            TokenDTO? token = await _userService.ValidateCredentials(userDTO).ConfigureAwait(false);
 
             if (token == null)
             {

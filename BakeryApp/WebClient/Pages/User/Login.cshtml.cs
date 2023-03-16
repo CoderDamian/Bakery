@@ -2,6 +2,7 @@ using DataTransferObjects.DTOs.Token;
 using DataTransferObjects.DTOs.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text;
 using System.Text.Json;
 
 namespace WebClient.Pages.User
@@ -30,9 +31,11 @@ namespace WebClient.Pages.User
         {
         }
 
-        public async Task OnPost()
+        public async Task<IActionResult> OnPost()
         {
-            var response = await _httpClient.GetAsync($"auth/{UserDTO}")
+            var userSerialize = JsonSerializer.Serialize(UserDTO);
+            var requestContent = new StringContent(userSerialize, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("auth", requestContent)
                 .ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode)
@@ -41,9 +44,20 @@ namespace WebClient.Pages.User
                     .ReadAsStreamAsync()
                     .ConfigureAwait(false);
 
-                TokenDTO? tokenDTO = await JsonSerializer.DeserializeAsync<TokenDTO>(content)
+                TokenDTO? tokenDTO = await JsonSerializer.DeserializeAsync<TokenDTO>(content, _options)
                     .ConfigureAwait(false);
+
+                MakeSessionCookie(tokenDTO);
+
+                return RedirectToPage("/Index");
             }
+
+            return Page();
+        }
+
+        private void MakeSessionCookie(TokenDTO tokenDTO)
+        {
+            Response.Cookies.Append("AccessTokenValue", tokenDTO.AccessTokenValue);
         }
     }
 }

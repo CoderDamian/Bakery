@@ -44,7 +44,11 @@ namespace RESTFul.Extensions
         }
 
         public static void AddMapper(this IServiceCollection services)
-            => services.AddAutoMapper(typeof(ProductProfile));
+        {
+            services.AddAutoMapper(typeof(ProductProfile));
+            services.AddAutoMapper(typeof(TokenProfile));
+            services.AddAutoMapper(typeof(UserProfile));
+        }
 
         public static void AddDataBase(this IServiceCollection services, IConfiguration configuration)
         {
