@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataTransferObjects.DTOs.Token;
 using DataTransferObjects.DTOs.User;
 using DomainModel;
 
@@ -9,6 +10,9 @@ namespace AppliationService.Mappings
         public UserProfile()
         {
             CreateMap<User, LoginUserDTO>()
+                .ReverseMap();
+
+            CreateMap<Token, TokenDTO>()
                 .ReverseMap();
         }
     }

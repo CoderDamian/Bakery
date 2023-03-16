@@ -51,8 +51,10 @@ namespace AppliationService.Services
             }
         }
 
-        public Token GetNewToken(IEnumerable<Claim> claims)
+        public Token GetNewToken(string userName)
         {
+            IEnumerable<Claim> claims = GetClaims(userName);
+
             Token token = new();
 
             token.Value = GetValue(claims);
@@ -76,7 +78,7 @@ namespace AppliationService.Services
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, ""),
+                new Claim(ClaimTypes.Name, userName),
                 new Claim(ClaimTypes.Role, "Manager")
             };
 
