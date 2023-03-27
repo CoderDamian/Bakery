@@ -62,5 +62,15 @@ namespace RESTFul.Extensions
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IUserRepository, UserRepository>();
         }
+
+        public static void AddCache(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.Configuration = configuration.GetConnectionString("RedisCache");
+
+                opt.InstanceName = "master";
+            });
+        }
     }
 }

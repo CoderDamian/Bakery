@@ -1,7 +1,7 @@
 ﻿using AppliationService.Contracts;
-using Microsoft.AspNetCore.Mvc;
 using DataTransferObjects.DTOs.Product;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RESTFul.Controllers
 {
@@ -13,7 +13,7 @@ namespace RESTFul.Controllers
 
         public ProductController(IProductService productService)
         {
-            this._productService = productService;
+            this._productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
         [HttpGet, Authorize]
