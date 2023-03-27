@@ -9,6 +9,8 @@
   <ItemGroup>
     <PackageReference Include="automapper" Version="12.0.1" />
     <PackageReference Include="microsoft.aspnetcore.authentication.jwtbearer" Version="6.0.14" />
+    <PackageReference Include="microsoft.extensions.caching.stackexchangeredis" Version="7.0.4" />
+    <PackageReference Include="StackExchange.redis" Version="2.6.96" />
   </ItemGroup>
 
   <ItemGroup>
