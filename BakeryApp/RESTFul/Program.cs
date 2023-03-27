@@ -8,6 +8,7 @@ builder.Services.AddDataBase(builder.Configuration);
 builder.Services.AddRepositories();
 builder.Services.AddBakeryService();
 builder.Services.AddMapper();
+builder.Services.AddCache(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
